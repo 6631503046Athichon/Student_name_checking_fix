@@ -13,28 +13,29 @@ from tkinter import ttk, messagebox, filedialog
 from datetime import datetime
 from modules.icons import IconManager
 
-# ==================== Design System ====================
-PRIMARY = "#2563EB"
-SUCCESS = "#16A34A"
-WARNING = "#D97706"
-DANGER = "#DC2626"
-NEUTRAL = "#6B7280"
+# ==================== Design System v4.0 ====================
+PRIMARY = "#3B82F6"
+SUCCESS = "#10B981"
+WARNING = "#F59E0B"
+DANGER = "#EF4444"
+NEUTRAL = "#64748B"
 
-TEXT_H1 = "#111827"
-TEXT_H2 = "#1F2937"
-TEXT_H3 = "#374151"
-TEXT_BODY = "#374151"
-TEXT_CAPTION = "#6B7280"
+TEXT_H1 = "#0F172A"
+TEXT_H2 = "#1E293B"
+TEXT_H3 = "#334155"
+TEXT_BODY = "#475569"
+TEXT_CAPTION = "#94A3B8"
 
-TABLE_HEADER_BG = "#F9FAFB"
-TABLE_STRIPE = "#F9FAFB"
-TABLE_BORDER = "#E5E7EB"
+TABLE_HEADER_BG = "#F1F5F9"
+TABLE_STRIPE = "#F8FAFC"
+TABLE_BORDER = "#E2E8F0"
 
 XS, S, M, L, XL, XXL = 4, 8, 16, 24, 32, 48
 RADIUS_BUTTON = 8
 RADIUS_CARD = 12
 RADIUS_MODAL = 16
-INPUT_BORDER = "#D1D5DB"
+RADIUS_INPUT = 8
+INPUT_BORDER = "#CBD5E1"
 
 
 def apply_treeview_style(tree, style_name="Custom.Treeview"):
@@ -60,7 +61,7 @@ def apply_treeview_style(tree, style_name="Custom.Treeview"):
 
 
 class HealthModule:
-    """โมดูลสุขภาพ - Design System v3.0"""
+    """โมดูลสุขภาพ - Design System v4.0"""
 
     def __init__(self, parent, db, update_status_callback):
         self.parent = parent
@@ -78,27 +79,28 @@ class HealthModule:
         self.content_frame = ctk.CTkScrollableFrame(
             self.parent,
             fg_color="transparent",
-            scrollbar_button_color=NEUTRAL,
+            scrollbar_button_color="#CBD5E1",
             scrollbar_button_hover_color=PRIMARY
         )
         self.content_frame.pack(fill="both", expand=True)
 
         self.tabview = ctk.CTkTabview(
             self.content_frame, corner_radius=RADIUS_CARD,
-            fg_color="#FFFFFF", border_width=1, border_color=TABLE_BORDER,
-            segmented_button_fg_color="#93C5FD",
+            fg_color="#FFFFFF", border_width=1, border_color="#E2E8F0",
+            segmented_button_fg_color="#E2E8F0",
             segmented_button_selected_color=PRIMARY,
-            segmented_button_unselected_color="#93C5FD",
-            segmented_button_selected_hover_color="#1D4ED8",
-            segmented_button_unselected_hover_color="#60A5FA",
-            text_color="#FFFFFF"
+            segmented_button_unselected_color="#E2E8F0",
+            segmented_button_selected_hover_color="#2563EB",
+            segmented_button_unselected_hover_color="#CBD5E1",
+            text_color="#FFFFFF",
+            font=ctk.CTkFont(family="Kanit", size=13, weight="500")
         )
         self.tabview.pack(fill="both", expand=True, padx=M, pady=M)
 
-        self.tabview.add("แปรงฟัน/ดื่มนม")
+        self.tabview.add("🦷 แปรงฟัน/ดื่มนม")
         self.create_daily_health_tab()
 
-        self.tabview.add("น้ำหนัก-ส่วนสูง")
+        self.tabview.add("📏 น้ำหนัก-ส่วนสูง")
         self.create_weight_height_tab()
 
     def create_daily_health_tab(self):

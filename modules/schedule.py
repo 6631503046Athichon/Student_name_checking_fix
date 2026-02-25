@@ -22,22 +22,22 @@ from reportlab.pdfbase.ttfonts import TTFont
 from modules.icons import IconManager
 from modules.pdf_utils import get_thai_font
 
-# ==================== Design System ====================
-PRIMARY = "#2563EB"
-SUCCESS = "#16A34A"
-WARNING = "#D97706"
-DANGER = "#DC2626"
-NEUTRAL = "#6B7280"
+# ==================== Design System v4.0 ====================
+PRIMARY = "#3B82F6"
+SUCCESS = "#10B981"
+WARNING = "#F59E0B"
+DANGER = "#EF4444"
+NEUTRAL = "#64748B"
 
-TEXT_H1 = "#111827"
-TEXT_H2 = "#1F2937"
-TEXT_H3 = "#374151"
-TEXT_BODY = "#374151"
-TEXT_CAPTION = "#6B7280"
+TEXT_H1 = "#0F172A"
+TEXT_H2 = "#1E293B"
+TEXT_H3 = "#334155"
+TEXT_BODY = "#475569"
+TEXT_CAPTION = "#94A3B8"
 
-TABLE_HEADER_BG = "#F9FAFB"
-TABLE_STRIPE = "#F9FAFB"
-TABLE_BORDER = "#E5E7EB"
+TABLE_HEADER_BG = "#F1F5F9"
+TABLE_STRIPE = "#F8FAFC"
+TABLE_BORDER = "#E2E8F0"
 
 XS, S, M, L, XL, XXL = 4, 8, 16, 24, 32, 48
 RADIUS_BUTTON = 8

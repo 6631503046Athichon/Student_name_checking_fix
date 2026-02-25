@@ -341,6 +341,15 @@ class Database:
         """)
         return [row[0] for row in self.cursor.fetchall()]
 
+    def count_students_by_classroom(self, classroom_name):
+        """นับจำนวนนักเรียนในห้องที่ระบุ"""
+        self.cursor.execute("""
+            SELECT COUNT(*) FROM students 
+            WHERE class_room = ? AND is_active = 1
+        """, (classroom_name,))
+        result = self.cursor.fetchone()
+        return result[0] if result else 0
+
     # ==================== CLASSROOMS ====================
 
     def add_classroom(self, name):

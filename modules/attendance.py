@@ -21,22 +21,22 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from modules.pdf_utils import get_thai_font
 
-# ==================== Design System ====================
-PRIMARY = "#2563EB"
-PRIMARY_LIGHT = "#EFF6FF"
-PRIMARY_HOVER = "#1D4ED8"
-SUCCESS = "#16A34A"
-SUCCESS_LIGHT = "#DCFCE7"
-SUCCESS_HOVER = "#15803D"
-WARNING = "#D97706"
+# ==================== Design System v4.0 ====================
+PRIMARY = "#3B82F6"
+PRIMARY_LIGHT = "#E0F2FE"
+PRIMARY_HOVER = "#2563EB"
+SUCCESS = "#10B981"
+SUCCESS_LIGHT = "#D1FAE5"
+SUCCESS_HOVER = "#059669"
+WARNING = "#F59E0B"
 WARNING_LIGHT = "#FEF3C7"
-WARNING_HOVER = "#B45309"
-DANGER = "#DC2626"
+WARNING_HOVER = "#D97706"
+DANGER = "#EF4444"
 DANGER_LIGHT = "#FEE2E2"
-DANGER_HOVER = "#B91C1C"
-NEUTRAL = "#6B7280"
-NEUTRAL_LIGHT = "#F3F4F6"
-NEUTRAL_HOVER = "#4B5563"
+DANGER_HOVER = "#DC2626"
+NEUTRAL = "#64748B"
+NEUTRAL_LIGHT = "#F1F5F9"
+NEUTRAL_HOVER = "#475569"
 
 TEXT_H1 = "#111827"
 TEXT_H2 = "#1F2937"
@@ -88,27 +88,28 @@ class AttendanceModule:
         self.content_frame = ctk.CTkScrollableFrame(
             self.parent,
             fg_color="transparent",
-            scrollbar_button_color=NEUTRAL,
+            scrollbar_button_color="#CBD5E1",
             scrollbar_button_hover_color=PRIMARY
         )
         self.content_frame.pack(fill="both", expand=True)
 
         self.tabview = ctk.CTkTabview(
             self.content_frame, corner_radius=RADIUS_CARD,
-            fg_color="#FFFFFF", border_width=1, border_color=TABLE_BORDER,
-            segmented_button_fg_color="#93C5FD",
+            fg_color="#FFFFFF", border_width=1, border_color="#E2E8F0",
+            segmented_button_fg_color="#E2E8F0",
             segmented_button_selected_color=PRIMARY,
-            segmented_button_unselected_color="#93C5FD",
-            segmented_button_selected_hover_color=PRIMARY_HOVER,
-            segmented_button_unselected_hover_color="#60A5FA",
-            text_color="#FFFFFF"
+            segmented_button_unselected_color="#E2E8F0",
+            segmented_button_selected_hover_color="#2563EB",
+            segmented_button_unselected_hover_color="#CBD5E1",
+            text_color="#FFFFFF",
+            font=ctk.CTkFont(family="Kanit", size=13, weight="500")
         )
         self.tabview.pack(fill="both", expand=True, padx=L, pady=L)
 
-        self.tabview.add("เช็คชื่อรายวัน")
+        self.tabview.add("📝 เช็คชื่อรายวัน")
         self.create_daily_tab()
 
-        self.tabview.add("รายงานขาดเรียน")
+        self.tabview.add("📊 รายงานขาดเรียน")
         self.create_absent_report_tab()
 
     # ==================== TAB เช็คชื่อรายวัน ====================

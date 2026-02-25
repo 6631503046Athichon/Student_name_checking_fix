@@ -11,30 +11,31 @@ from tkinter import ttk, messagebox
 from modules.icons import IconManager
 from modules.students import StudentForm
 
-# ==================== Design System ====================
-PRIMARY = "#2563EB"
-SUCCESS = "#16A34A"
-WARNING = "#D97706"
-DANGER = "#DC2626"
-NEUTRAL = "#6B7280"
+# ==================== Design System v4.0 ====================
+PRIMARY = "#3B82F6"
+SUCCESS = "#10B981"
+WARNING = "#F59E0B"
+DANGER = "#EF4444"
+NEUTRAL = "#64748B"
 
-TEXT_H1 = "#111827"
-TEXT_H2 = "#1F2937"
-TEXT_H3 = "#374151"
-TEXT_BODY = "#374151"
-TEXT_CAPTION = "#6B7280"
+TEXT_H1 = "#0F172A"
+TEXT_H2 = "#1E293B"
+TEXT_H3 = "#334155"
+TEXT_BODY = "#475569"
+TEXT_CAPTION = "#94A3B8"
 
 SURFACE = "#FFFFFF"
-TABLE_HEADER_BG = "#F9FAFB"
-TABLE_HOVER = "#EFF6FF"
-TABLE_STRIPE = "#F9FAFB"
-TABLE_BORDER = "#E5E7EB"
+TABLE_HEADER_BG = "#F1F5F9"
+TABLE_HOVER = "#E0F2FE"
+TABLE_STRIPE = "#F8FAFC"
+TABLE_BORDER = "#E2E8F0"
 
 XS, S, M, L, XL, XXL = 4, 8, 16, 24, 32, 48
 RADIUS_BUTTON = 8
 RADIUS_CARD = 12
 RADIUS_MODAL = 16
-INPUT_BORDER = "#D1D5DB"
+RADIUS_INPUT = 8
+INPUT_BORDER = "#CBD5E1"
 
 
 class ClassroomsModule:
@@ -53,7 +54,7 @@ class ClassroomsModule:
         """สร้าง UI"""
         self.content_frame = ctk.CTkScrollableFrame(
             self.parent, fg_color="transparent",
-            scrollbar_button_color=NEUTRAL,
+            scrollbar_button_color="#CBD5E1",
             scrollbar_button_hover_color=PRIMARY
         )
         self.content_frame.pack(fill="both", expand=True)
@@ -63,19 +64,18 @@ class ClassroomsModule:
         top_frame.pack(fill="x", padx=L, pady=(L, M))
 
         ctk.CTkLabel(
-            top_frame, text="ห้องเรียนทั้งหมด",
-            font=ctk.CTkFont(family="TH Sarabun New", size=20, weight="bold"),
+            top_frame, text="🏫 ห้องเรียนทั้งหมด",
+            font=ctk.CTkFont(family="Kanit", size=20, weight="600"),
             text_color=TEXT_H1
         ).pack(side="left")
 
         ctk.CTkButton(
-            top_frame, text="เพิ่มห้องเรียน",
+            top_frame, text="+ เพิ่มห้องเรียน",
             command=self.add_classroom,
-            font=ctk.CTkFont(family="TH Sarabun New", size=14, weight="bold"),
-            width=140, height=36,
-            corner_radius=RADIUS_BUTTON,
-            fg_color=PRIMARY, hover_color="#1D4ED8",
-            image=IconManager.get_white("plus", 14), compound="left"
+            font=ctk.CTkFont(family="Kanit", size=14, weight="500"),
+            width=150, height=40,
+            corner_radius=RADIUS_INPUT,
+            fg_color=PRIMARY, hover_color="#2563EB"
         ).pack(side="right")
 
         # Cards container
@@ -85,15 +85,15 @@ class ClassroomsModule:
         # Empty state
         self.empty_label = ctk.CTkLabel(
             self.cards_frame,
-            text="ยังไม่มีห้องเรียน กดปุ่ม \"เพิ่มห้องเรียน\" เพื่อเริ่มต้น",
-            font=ctk.CTkFont(family="TH Sarabun New", size=16),
+            text="📭 ยังไม่มีห้องเรียน กดปุ่ม '+ เพิ่มห้องเรียน' เพื่อเริ่มต้น",
+            font=ctk.CTkFont(family="Kanit", size=14),
             text_color=TEXT_CAPTION
         )
 
         # ตารางนักเรียน (ซ่อนไว้ก่อน จะแสดงเมื่อกดดู)
         self.detail_frame = ctk.CTkFrame(
             self.content_frame, fg_color=SURFACE,
-            corner_radius=RADIUS_CARD, border_width=1, border_color=TABLE_BORDER
+            corner_radius=RADIUS_CARD, border_width=1, border_color="#E2E8F0"
         )
 
         detail_top = ctk.CTkFrame(self.detail_frame, fg_color="transparent")
@@ -101,18 +101,17 @@ class ClassroomsModule:
 
         self.detail_header = ctk.CTkLabel(
             detail_top, text="",
-            font=ctk.CTkFont(family="TH Sarabun New", size=16, weight="bold"),
+            font=ctk.CTkFont(family="Kanit", size=16, weight="600"),
             text_color=TEXT_H2
         )
         self.detail_header.pack(side="left")
 
         self.add_student_btn = ctk.CTkButton(
-            detail_top, text="เพิ่มนักเรียน",
+            detail_top, text="+ เพิ่มนักเรียน",
             command=self._add_student_to_room,
-            font=ctk.CTkFont(family="TH Sarabun New", size=13, weight="bold"),
-            width=110, height=30, corner_radius=RADIUS_BUTTON,
-            fg_color=PRIMARY, hover_color="#1D4ED8",
-            image=IconManager.get_white("plus", 12), compound="left"
+            font=ctk.CTkFont(family="Kanit", size=13, weight="500"),
+            width=120, height=36, corner_radius=RADIUS_INPUT,
+            fg_color=PRIMARY, hover_color="#2563EB"
         )
         self.add_student_btn.pack(side="right")
 

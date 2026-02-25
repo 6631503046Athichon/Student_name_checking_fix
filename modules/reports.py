@@ -25,19 +25,19 @@ from reportlab.pdfbase.ttfonts import TTFont
 from modules.icons import IconManager
 from modules.pdf_utils import get_thai_font
 
-# ==================== Design System ====================
+# ==================== Design System v4.0 ====================
 # Accent Colors (10%)
-PRIMARY = "#2563EB"
-SUCCESS = "#16A34A"
-WARNING = "#D97706"
-DANGER = "#DC2626"
-NEUTRAL = "#6B7280"
+PRIMARY = "#3B82F6"
+SUCCESS = "#10B981"
+WARNING = "#F59E0B"
+DANGER = "#EF4444"
+NEUTRAL = "#64748B"
 
 # Typography Colors
-TEXT_H1 = "#111827"
-TEXT_H2 = "#1F2937"
-TEXT_H3 = "#374151"
-TEXT_BODY = "#374151"
+TEXT_H1 = "#0F172A"
+TEXT_H2 = "#1E293B"
+TEXT_H3 = "#334155"
+TEXT_BODY = "#475569"
 TEXT_CAPTION = "#6B7280"
 
 # Surface / Background
@@ -90,7 +90,7 @@ class ReportsModule:
         main_frame = ctk.CTkScrollableFrame(
             self.parent,
             fg_color="transparent",
-            scrollbar_button_color=NEUTRAL,
+            scrollbar_button_color="#CBD5E1",
             scrollbar_button_hover_color=PRIMARY,
         )
         main_frame.pack(fill="both", expand=True, padx=L, pady=L)
@@ -101,15 +101,15 @@ class ReportsModule:
 
         ctk.CTkLabel(
             header_frame,
-            text="รายงานและส่งออกข้อมูล",
-            font=ctk.CTkFont(family="TH Sarabun New", size=28, weight="bold"),
+            text="📊 รายงานและส่งออกข้อมูล",
+            font=ctk.CTkFont(family="Kanit", size=24, weight="600"),
             text_color=TEXT_H1,
         ).pack(side="left")
 
         ctk.CTkLabel(
             header_frame,
             text="เลือกประเภทรายงานเพื่อส่งออกข้อมูล",
-            font=ctk.CTkFont(family="TH Sarabun New", size=14),
+            font=ctk.CTkFont(family="Kanit", size=14),
             text_color=TEXT_CAPTION,
         ).pack(side="left", padx=(M, 0))
 

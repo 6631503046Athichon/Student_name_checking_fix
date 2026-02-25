@@ -25,37 +25,38 @@ import os
 from modules.icons import IconManager
 from modules.pdf_utils import get_thai_font
 
-# ==================== Design System ====================
-# Accent Colors (10%)
-PRIMARY = "#2563EB"
-SUCCESS = "#16A34A"
-WARNING = "#D97706"
-DANGER = "#DC2626"
-NEUTRAL = "#6B7280"
+# ==================== Design System v4.0 ====================
+# Accent Colors (10%) - Updated
+PRIMARY = "#3B82F6"   # Blue
+SUCCESS = "#10B981"   # Green
+WARNING = "#F59E0B"   # Amber
+DANGER = "#EF4444"    # Red
+NEUTRAL = "#64748B"   # Slate
 
-# Typography Colors
-TEXT_H1 = "#111827"
-TEXT_H2 = "#1F2937"
-TEXT_H3 = "#374151"
-TEXT_BODY = "#374151"
-TEXT_CAPTION = "#6B7280"
+# Typography Colors - Better contrast
+TEXT_H1 = "#0F172A"    # Near black
+TEXT_H2 = "#1E293B"   # Dark slate
+TEXT_H3 = "#334155"   # Medium slate
+TEXT_BODY = "#475569"  # Body
+TEXT_CAPTION = "#94A3B8"  # Muted
 
-# Table
-TABLE_HEADER_BG = "#F9FAFB"
-TABLE_HOVER = "#EFF6FF"
-TABLE_STRIPE = "#F9FAFB"
-TABLE_BORDER = "#E5E7EB"
+# Table - Modern
+TABLE_HEADER_BG = "#F1F5F9"  # Slate-100
+TABLE_HOVER = "#E0F2FE"      # Light blue
+TABLE_STRIPE = "#F8FAFC"    # Very light
+TABLE_BORDER = "#E2E8F0"   # Light border
 
 # Spacing
 XS, S, M, L, XL, XXL = 4, 8, 16, 24, 32, 48
 
-# Radius
+# Radius - Softer
 RADIUS_BUTTON = 8
 RADIUS_CARD = 12
 RADIUS_MODAL = 16
+RADIUS_INPUT = 8
 
-# Input
-INPUT_BORDER = "#D1D5DB"
+# Input - Modern
+INPUT_BORDER = "#CBD5E1"  # Slate-300
 INPUT_FOCUS = PRIMARY
 
 
@@ -82,7 +83,7 @@ class StudentsModule:
         self.content_frame = ctk.CTkScrollableFrame(
             self.parent,
             fg_color="transparent",
-            scrollbar_button_color=NEUTRAL,
+            scrollbar_button_color="#CBD5E1",
             scrollbar_button_hover_color=PRIMARY
         )
         self.content_frame.pack(fill="both", expand=True)
@@ -90,7 +91,7 @@ class StudentsModule:
         # === ส่วนค้นหาและกรอง (card style) ===
         search_card = ctk.CTkFrame(
             self.content_frame, fg_color="#FFFFFF",
-            corner_radius=RADIUS_CARD, border_width=1, border_color=TABLE_BORDER
+            corner_radius=RADIUS_CARD, border_width=1, border_color="#E2E8F0"
         )
         search_card.pack(fill="x", padx=L, pady=(L, M))
 
@@ -103,13 +104,14 @@ class StudentsModule:
         search_entry = ctk.CTkEntry(
             search_frame,
             textvariable=self.search_var,
-            placeholder_text="ค้นหาชื่อ, นามสกุล หรือรหัส...",
-            width=300,
-            height=38,
-            font=ctk.CTkFont(family="TH Sarabun New", size=14),
-            corner_radius=RADIUS_BUTTON,
+            placeholder_text="🔍 ค้นหาชื่อ, นามสกุล หรือรหัส...",
+            width=320,
+            height=42,
+            font=ctk.CTkFont(family="Kanit", size=14),
+            corner_radius=RADIUS_INPUT,
             border_width=1,
-            border_color=INPUT_BORDER
+            border_color=INPUT_BORDER,
+            placeholder_text_color="#94A3B8"
         )
         search_entry.pack(side="left", padx=(0, M))
 
@@ -117,9 +119,9 @@ class StudentsModule:
         ctk.CTkLabel(
             search_frame,
             text="ห้อง:",
-            font=ctk.CTkFont(family="TH Sarabun New", size=14, weight="bold"),
+            font=("Kanit", 14),
             text_color=TEXT_H3
-        ).pack(side="left", padx=(0, XS))
+        ).pack(side="left", padx=(0, S))
 
         self.class_var = ctk.StringVar(value="ทั้งหมด")
         class_options = ["ทั้งหมด"] + self.db.get_class_rooms()
@@ -128,27 +130,27 @@ class StudentsModule:
             variable=self.class_var,
             values=class_options,
             command=lambda x: self.load_students(),
-            width=130,
+            width=140,
             height=38,
-            font=ctk.CTkFont(family="TH Sarabun New", size=14),
-            corner_radius=20,
-            fg_color="#EFF6FF",
-            button_color="#EFF6FF",
-            button_hover_color="#DBEAFE",
-            text_color="#1E40AF",
-            dropdown_fg_color="#F0F4FF",
-            dropdown_hover_color="#DBEAFE",
-            dropdown_text_color="#1E40AF",
-            dropdown_font=ctk.CTkFont(family="TH Sarabun New", size=16)
+            font=ctk.CTkFont(family="Kanit", size=13),
+            corner_radius=RADIUS_INPUT,
+            fg_color="#F8FAFC",
+            button_color=PRIMARY,
+            button_hover_color="#2563EB",
+            text_color=TEXT_H1,
+            dropdown_fg_color="#FFFFFF",
+            dropdown_hover_color="#E0F2FE",
+            dropdown_text_color=TEXT_H1,
+            dropdown_font=ctk.CTkFont(family="Kanit", size=13)
         ).pack(side="left", padx=(0, M))
 
         # กรองปีการศึกษา
         ctk.CTkLabel(
             search_frame,
-            text="ปีการศึกษา:",
-            font=ctk.CTkFont(family="TH Sarabun New", size=14, weight="bold"),
+            text="ปี:",
+            font=("Kanit", 14),
             text_color=TEXT_H3
-        ).pack(side="left", padx=(0, XS))
+        ).pack(side="left", padx=(0, S))
 
         self.year_var = ctk.StringVar(value="ทั้งหมด")
         year_options = ["ทั้งหมด"] + self.db.get_class_years()
@@ -165,35 +167,33 @@ class StudentsModule:
             button_color="#EFF6FF",
             button_hover_color="#DBEAFE",
             text_color="#1E40AF",
-            dropdown_fg_color="#F0F4FF",
-            dropdown_hover_color="#DBEAFE",
-            dropdown_text_color="#1E40AF",
-            dropdown_font=ctk.CTkFont(family="TH Sarabun New", size=16)
+            dropdown_fg_color="#FFFFFF",
+            dropdown_hover_color="#E0F2FE",
+            dropdown_text_color=TEXT_H1,
+            dropdown_font=ctk.CTkFont(family="Kanit", size=13)
         ).pack(side="left")
 
-        # ปุ่ม Refresh
+        # ปุ่ม Refresh - Modern style
         ctk.CTkButton(
             search_frame,
-            text="รีเฟรช",
-            width=90,
+            text="⟳ รีเฟรช",
+            width=100,
             height=38,
             command=self.refresh_data,
-            font=ctk.CTkFont(family="TH Sarabun New", size=14),
-            corner_radius=RADIUS_BUTTON,
-            fg_color="transparent",
+            font=ctk.CTkFont(family="Kanit", size=13),
+            corner_radius=RADIUS_INPUT,
+            fg_color="#F8FAFC",
             border_width=1,
-            border_color=INPUT_BORDER,
+            border_color="#E2E8F0",
             text_color=TEXT_H3,
-            hover_color="#F3F4F6",
-            image=IconManager.get("rotate", 14, color=TEXT_H3, dark_color="#9CA3AF"),
-            compound="left"
+            hover_color="#E2E8F0"
         ).pack(side="right")
 
         # === ตาราง (card style) ===
         table_card = ctk.CTkFrame(
             self.content_frame, corner_radius=RADIUS_CARD,
             fg_color="#FFFFFF",
-            border_width=1, border_color=TABLE_BORDER
+            border_width=1, border_color="#E2E8F0"
         )
         table_card.pack(fill="x", padx=L, pady=(0, M))
 
@@ -228,8 +228,8 @@ class StudentsModule:
         # Empty state label (จะแสดง/ซ่อนตามข้อมูล)
         self.empty_label = ctk.CTkLabel(
             table_card,
-            text="ยังไม่มีข้อมูลนักเรียน กด + เพื่อเพิ่ม",
-            font=ctk.CTkFont(family="TH Sarabun New", size=16),
+            text="📋 ยังไม่มีข้อมูลนักเรียน กด + เพื่อเพิ่ม",
+            font=ctk.CTkFont(family="Kanit", size=14),
             text_color=TEXT_CAPTION
         )
 
@@ -244,59 +244,53 @@ class StudentsModule:
         # ปุ่ม PRIMARY: เพิ่มนักเรียน (ปุ่มหลักเดียวในส่วนนี้)
         ctk.CTkButton(
             left_buttons,
-            text="เพิ่มนักเรียน",
+            text="+ เพิ่มนักเรียน",
             command=self.add_student,
-            font=ctk.CTkFont(family="TH Sarabun New", size=14, weight="bold"),
-            width=140,
-            height=40,
-            corner_radius=RADIUS_BUTTON,
+            font=ctk.CTkFont(family="Kanit", size=14, weight="500"),
+            width=150,
+            height=44,
+            corner_radius=RADIUS_INPUT,
             fg_color=PRIMARY,
-            hover_color="#1D4ED8",
-            image=IconManager.get_white("plus", 14),
-            compound="left"
+            hover_color="#2563EB"
         ).pack(side="left", padx=(0, S))
 
         # ปุ่ม SECONDARY: แก้ไข
         ctk.CTkButton(
             left_buttons,
-            text="แก้ไข",
+            text="✏️ แก้ไข",
             command=self.edit_student,
-            font=ctk.CTkFont(family="TH Sarabun New", size=14),
-            width=100,
+            font=ctk.CTkFont(family="Kanit", size=13),
+            width=110,
             height=40,
-            corner_radius=RADIUS_BUTTON,
-            fg_color="transparent",
+            corner_radius=RADIUS_INPUT,
+            fg_color="#FFFFFF",
             border_width=1,
             border_color=PRIMARY,
             text_color=PRIMARY,
-            hover_color=TABLE_HOVER,
-            image=IconManager.get("pen-to-square", 14, color=PRIMARY, dark_color=PRIMARY),
-            compound="left"
+            hover_color="#E0F2FE"
         ).pack(side="left", padx=(0, S))
 
         # ปุ่ม SECONDARY: ลบ
         ctk.CTkButton(
             left_buttons,
-            text="ลบ",
+            text="🗑️ ลบ",
             command=self.delete_student,
-            font=ctk.CTkFont(family="TH Sarabun New", size=14),
-            width=80,
+            font=ctk.CTkFont(family="Kanit", size=13),
+            width=90,
             height=40,
-            corner_radius=RADIUS_BUTTON,
-            fg_color="transparent",
+            corner_radius=RADIUS_INPUT,
+            fg_color="#FFFFFF",
             border_width=1,
             border_color=DANGER,
             text_color=DANGER,
-            hover_color="#FEF2F2",
-            image=IconManager.get("trash", 14, color=DANGER, dark_color=DANGER),
-            compound="left"
+            hover_color="#FEE2E2"
         ).pack(side="left")
 
         # ปุ่มด้านขวา (SECONDARY style ทั้งหมด)
         right_buttons = ctk.CTkFrame(button_frame, fg_color="transparent")
         right_buttons.pack(side="right")
 
-        for text, cmd, icon_name in [("Import Excel", self.import_excel, "file-import"),
+        for text, cmd, icon_name in [("📥 Import", self.import_excel, "file-import"),
                                       ("Export Excel", self.export_excel, "file-export"),
                                       ("Export PDF", self.export_pdf, "file-pdf")]:
             ctk.CTkButton(
